@@ -19,3 +19,7 @@ target_link_libraries(HighprecisionCSR PUBLIC ${MPFR_LIBRARIES})
 # executable:
 add_executable(HighPrecisionCSRMain src/main.cpp)
 target_link_libraries(HighPrecisionCSRMain PUBLIC HighprecisionCSR)
+
+# python support
+add_subdirectory(${CMAKE_SOURCE_DIR}/external/pybind11)
+add_subdirectory(${CMAKE_SOURCE_DIR}/python)
