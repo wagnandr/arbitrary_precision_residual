@@ -1,13 +1,7 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel",
-    # "pybind11>=2.2.4",
-    "cmake>=3.21",
-    "scikit-build>=0.12",
-]
+requires = ["scikit-build-core", "pybind11"]
+build-backend = "scikit_build_core.build"
 
-build-backend = "setuptools.build_meta"
-
-[tool.isort]
-profile = "black"
+[project]
+name = "hpresidual"
+version = "0.0.1"

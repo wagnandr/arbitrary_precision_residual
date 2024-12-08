@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
+project(example LANGUAGES CXX)
 
 project(HighprecisionCSR)
 
@@ -10,11 +11,12 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/external/eigen/cm
 find_package(MPFR REQUIRED)
 
 # our library:
-add_library(HighprecisionCSR SHARED src/highprecision_csr.cpp)
+add_library(HighprecisionCSR STATIC src/highprecision_csr.cpp)
 target_include_directories(HighprecisionCSR PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_include_directories(HighprecisionCSR PUBLIC external/eigen)
 target_include_directories(HighprecisionCSR PUBLIC external/mpreal)
 target_link_libraries(HighprecisionCSR PUBLIC ${MPFR_LIBRARIES})
+set_target_properties(HighprecisionCSR PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 
 # executable:
 add_executable(HighPrecisionCSRMain src/main.cpp)
