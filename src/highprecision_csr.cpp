@@ -32,6 +32,11 @@ void test()
 
   vec(0) = "3.14159265358979323846264338327950288419716939937510";
   vec(1) = "2.71828182845904523536028747135266249775724709369995";
+
+  std::vector< std::string > nums = { "3.14159265358979323846264338327950288419716939937510", "2.71828182845904523536028747135266249775724709369995" };
+  Eigen::Matrix<mpfr::mpreal, Eigen::Dynamic, 1> vec2(nums.size());
+  for (size_t i = 0; i < nums.size(); i += 1)
+    vec2[i] = nums[i];
 }
 
 CSRMatrix create_csr_matrix(
@@ -60,4 +65,16 @@ CSRMatrix create_csr_matrix(
   mat.makeCompressed();
 
   return mat;
+}
+
+Vector create_vector(const std::vector<std::string> & data)
+{
+  Eigen::Matrix<mpfr::mpreal, Eigen::Dynamic, 1> vec(data.size());
+  for (size_t i = 0; i < data.size(); i += 1)
+    vec[i] = data[i];
+  return vec;
+}
+
+void set_precision(size_t prec){
+  mpfr::mpreal::set_default_prec(prec);
 }
