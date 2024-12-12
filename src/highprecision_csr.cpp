@@ -122,7 +122,7 @@ void HPResidual::copy_to_b(double const* const src)
     b[i] = src[i];
 }
 
-void HPResidual::copy_from_x(double * const dst) 
+void HPResidual::copy_from_x(double * const dst) const
 {
   for(size_t i = 0; i < x.size(); i += 1)
     dst[i] = x[i].toDouble();
@@ -135,7 +135,7 @@ void HPResidual::add_to_x(double const *const to_add)
 
 }
 
-void HPResidual::evaluate(double *const dst)
+void HPResidual::evaluate(double *const dst) const
 {
   auto d = b - A * x;
   for(size_t i = 0; i < d.size(); i += 1)
