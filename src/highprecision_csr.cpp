@@ -58,24 +58,21 @@ CSRMatrix create_csr_matrix(
     const size_t data_size)
 {
   // Create an Eigen sparse matrix
-  CSRMatrix mat(rows, cols);
+  CSRMatrix mat2(rows, cols);
 
-  // Reserve space for non-zero elements
-  mat.reserve(data_size);
-
-  // Fill the matrix
+  typedef Eigen::Triplet<mpfr::mpreal> T;
+  std::vector<T> tripletList;
+  tripletList.reserve(data_size);
   for (int row = 0; row < rows; ++row)
   {
     for (int idx = indptr[row]; idx < indptr[row + 1]; ++idx)
     {
-      mat.insert(row, indices[idx]) = data[idx];
+      tripletList.emplace_back(row, indices[idx], data[idx]);
     }
   }
+  mat2.setFromTriplets(tripletList.begin(), tripletList.end());
 
-  // Finalize the matrix
-  mat.makeCompressed();
-
-  return mat;
+  return mat2;
 }
 
 Vector create_vector(const std::vector<std::string> &data)
@@ -137,7 +134,7 @@ void HPResidual::add_to_x(double const *const to_add)
 
 void HPResidual::evaluate(double *const dst) const
 {
-  auto d = b - A * x;
+  Vector d = b - A * x;
   for(size_t i = 0; i < d.size(); i += 1)
     dst[i] = d[i].toDouble();
 }
