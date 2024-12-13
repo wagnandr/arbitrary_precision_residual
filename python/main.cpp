@@ -11,7 +11,7 @@ PYBIND11_MODULE(_arbitrary_precision_residual_core, m)
   m.doc() = "pybind11 example plugin"; // optional module docstring
   m.def("set_precision", set_precision, "Sets the default precision in our library");
 
-  py::class_<CSRMatrix>(m, "Matrix");
+  py::class_<CSRMatrix>(m, "CSRMatrix");
   py::class_<Vector>(m, "Vector");
 
   py::class_<HPResidual>(m, "HPResidual")
