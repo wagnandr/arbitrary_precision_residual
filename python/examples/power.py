@@ -6,8 +6,9 @@ import hpresidual as hpr
 from matplotlib import pyplot as plt
 
 # n = 5000
+#n = 200000
 n = 20000
-prec = 128
+prec = 128 
 
 hpr.set_precision(prec)
 
@@ -68,24 +69,25 @@ dpi = decimal.Decimal('3.1415926535897932384626433832795028841971693993751058209
 
 start = time.time()
 x = [str(sin(decimal.Decimal(i)/decimal.Decimal(n-1) * dpi)) for i in range(n)]
+#x = [str(ix) for ix in x]
 end = time.time()
 print(f'prepare x elapsed {end - start}')
 
 start = time.time()
-hprcalc = hpr.HPResidual(A2)
+hprcalc = hpr.create(A2)
 end = time.time()
 print(f'convert A elapsed {end - start}')
 
 b = np.zeros(A.shape[0])
 
 start = time.time()
-hprcalc._cpp.copy_to_b(b)
-hprcalc._cpp.set_x_from_string(x)
+hprcalc.set_b(b)
+hprcalc.set_x(x)
 end = time.time()
 print(f'preprocessing elapsed {end - start}')
 xx = np.zeros(A.shape[0])
 start = time.time()
-hprcalc._cpp.evaluate(xx)
+hprcalc.evaluate(xx)
 xx /= np.linalg.norm(xx)
 end = time.time()
 print(f'multiplication elapsed {end - start}')

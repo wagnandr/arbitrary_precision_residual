@@ -37,10 +37,10 @@ public:
         const size_t cols,
         const size_t data_size);
 
-    void set_x_from_string(const std::vector<std::string> &data);
-    void copy_to_x(double const *const src);
-    void copy_to_b(double const *const src);
-    void copy_from_x(double *const dst) const;
+    void set_x(const std::vector<std::string> &data);
+    void set_x(double const *const src);
+    void set_b(double const *const src);
+    void get_x(double *const dst) const;
     void add_to_x(double const *const to_add);
     void evaluate(double *const dst) const;
 

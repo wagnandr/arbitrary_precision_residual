@@ -101,25 +101,25 @@ HPResidual::HPResidual(
 , x(Vector(cols))
 {}
 
-void HPResidual::set_x_from_string(const std::vector<std::string> &data)
+void HPResidual::set_x(const std::vector<std::string> &data)
 {
   for(size_t i = 0; i < x.size(); i += 1)
     x[i] = data[i];
 }
 
-void HPResidual::copy_to_x(double const* const src)
+void HPResidual::set_x(double const* const src)
 {
   for(size_t i = 0; i < x.size(); i += 1)
     x[i] = src[i];
 }
 
-void HPResidual::copy_to_b(double const* const src)
+void HPResidual::set_b(double const* const src)
 {
   for(size_t i = 0; i < b.size(); i += 1)
     b[i] = src[i];
 }
 
-void HPResidual::copy_from_x(double * const dst) const
+void HPResidual::get_x(double * const dst) const
 {
   for(size_t i = 0; i < x.size(); i += 1)
     dst[i] = x[i].toDouble();
