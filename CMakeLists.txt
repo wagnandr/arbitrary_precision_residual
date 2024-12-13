@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(example LANGUAGES CXX)
 
-project(HighprecisionCSR)
+project(ArbitraryPrecisionResidual)
 
 # we use eigen for vectors:
 add_subdirectory(external/eigen)
@@ -11,16 +11,16 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/external/eigen/cm
 find_package(MPFR REQUIRED)
 
 # our library:
-add_library(HighprecisionCSR STATIC src/highprecision_csr.cpp)
-target_include_directories(HighprecisionCSR PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_include_directories(HighprecisionCSR PUBLIC external/eigen)
-target_include_directories(HighprecisionCSR PUBLIC external/mpreal)
-target_link_libraries(HighprecisionCSR PUBLIC ${MPFR_LIBRARIES})
-set_target_properties(HighprecisionCSR PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+add_library(ArbitraryPrecisionResidual STATIC src/arbitrary_precision_residual.cpp)
+target_include_directories(ArbitraryPrecisionResidual PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(ArbitraryPrecisionResidual PUBLIC external/eigen)
+target_include_directories(ArbitraryPrecisionResidual PUBLIC external/mpreal)
+target_link_libraries(ArbitraryPrecisionResidual PUBLIC ${MPFR_LIBRARIES})
+set_target_properties(ArbitraryPrecisionResidual PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 
 # executable:
-add_executable(HighPrecisionCSRMain src/main.cpp)
-target_link_libraries(HighPrecisionCSRMain PUBLIC HighprecisionCSR)
+add_executable(ArbitraryPrecisionMain src/main.cpp)
+target_link_libraries(ArbitraryPrecisionMain PUBLIC ArbitraryPrecisionResidual)
 
 # python support
 add_subdirectory(${CMAKE_SOURCE_DIR}/external/pybind11)

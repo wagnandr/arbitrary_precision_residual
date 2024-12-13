@@ -2,7 +2,7 @@ import decimal
 import numpy as np
 import scipy.sparse as sps
 import time
-import hpresidual as hpr
+import arbitrary_precision_residual as apr
 from matplotlib import pyplot as plt
 
 # n = 5000
@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 n = 20000
 prec = 128 
 
-hpr.set_precision(prec)
+apr.set_precision(prec)
 
 def include_boundary_conditions(A):
     A[0, 1] = 0; A[0, 0] = 1
@@ -74,20 +74,20 @@ end = time.time()
 print(f'prepare x elapsed {end - start}')
 
 start = time.time()
-hprcalc = hpr.create(A2)
+aprcalc = apr.create(A2)
 end = time.time()
 print(f'convert A elapsed {end - start}')
 
 b = np.zeros(A.shape[0])
 
 start = time.time()
-hprcalc.set_b(b)
-hprcalc.set_x(x)
+aprcalc.set_b(b)
+aprcalc.set_x(x)
 end = time.time()
 print(f'preprocessing elapsed {end - start}')
 xx = np.zeros(A.shape[0])
 start = time.time()
-hprcalc.evaluate(xx)
+aprcalc.evaluate(xx)
 xx /= np.linalg.norm(xx)
 end = time.time()
 print(f'multiplication elapsed {end - start}')

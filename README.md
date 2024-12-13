@@ -1,3 +1,7 @@
+# Description
+
+Small library to evaluate a residual in arbitrary precision.
+
 # Dependencies 
 
 sudo apt-get install libmpfr-dev

@@ -2,11 +2,11 @@
 #include <pybind11/numpy.h>
 #include <pybind11/stl.h>
 
-#include "highprecision_csr.hpp"
+#include "arbitrary_precision_residual.hpp"
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(_hpresidual_core, m)
+PYBIND11_MODULE(_arbitrary_precision_residual_core, m)
 {
   m.doc() = "pybind11 example plugin"; // optional module docstring
   m.def("set_precision", set_precision, "Sets the default precision in our library");

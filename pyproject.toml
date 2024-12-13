@@ -3,5 +3,5 @@ requires = ["scikit-build-core", "pybind11"]
 build-backend = "scikit_build_core.build"
 
 [project]
-name = "hpresidual"
+name = "arbitrary_precision_residual"
 version = "0.0.1"
