@@ -2,8 +2,6 @@
 #include <unsupported/Eigen/MPRealSupport>
 #include <Eigen/Sparse>
 
-void test();
-
 using CSRMatrix = Eigen::SparseMatrix<mpfr::mpreal>;
 using Vector = Eigen::Matrix<mpfr::mpreal, Eigen::Dynamic, 1>;
 

@@ -37,15 +37,19 @@ PYBIND11_MODULE(_hpresidual_core, m)
       .def("set_x", [](HPResidual& self, const std::vector< std::string>& x){
         self.set_x(x);
       })
-      .def("get_x", &HPResidual::get_x)
+      .def("get_x", [](const HPResidual& self, py::array_t< double > x){
+        py::buffer_info x_buf = x.request();
+        self.get_x(static_cast< double * const >(x_buf.ptr));
+
+      })
       //.def("copy_to_b", &HPResidual::copy_to_b)
       .def("set_b", [](HPResidual& self, py::array_t< double > b){
         py::buffer_info b_buf = b.request();
         self.set_b(static_cast< double const * const >(b_buf.ptr));
       })
-      .def("add_to_x", [](const HPResidual& self, py::array_t< double > dst){
+      .def("add_to_x", [](HPResidual& self, py::array_t< double > dst){
         py::buffer_info dst_buf = dst.request();
-
+        self.add_to_x(static_cast< double const * const >(dst_buf.ptr));
       })
       //.def("evaluate", &HPResidual::evaluate);
       .def("evaluate", [](const HPResidual& self, py::array_t< double > dst){
