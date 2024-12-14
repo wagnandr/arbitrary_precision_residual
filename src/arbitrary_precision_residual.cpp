@@ -101,4 +101,8 @@ namespace arbitrary_precision_residual
       dst[i] = d[i].toDouble();
   }
 
+
+  int HPResidual::size_imagespace() const { return A.rows(); }
+
+  int HPResidual::size_preimagespace() const { return A.cols(); }
 }

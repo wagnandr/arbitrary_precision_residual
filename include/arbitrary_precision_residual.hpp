@@ -45,6 +45,9 @@ namespace arbitrary_precision_residual
         void add_to_x(double const *const to_add);
         void evaluate(double *const dst) const;
 
+        int size_imagespace() const;
+        int size_preimagespace() const;
+
     private:
         CSRMatrix A;
         Vector b;
